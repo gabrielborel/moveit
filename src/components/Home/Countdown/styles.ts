@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -58,5 +59,26 @@ export const CountdownButton = styled.button`
 
   &:hover {
     background: ${({ theme }) => theme.colors.blueDark};
+  }
+`;
+
+export const StopCountdownButton = styled(CountdownButton)`
+  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.title};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.red};
+    color: ${({ theme }) => theme.colors.white};
+  }
+`;
+
+export const FinishedButton = styled(CountdownButton)`
+  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.text};
+  border-bottom: 4px solid ${({ theme }) => theme.colors.green};
+  cursor: not-allowed;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.white};
   }
 `;

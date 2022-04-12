@@ -1,17 +1,30 @@
+/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Container, CountdownButton } from './styles';
+import {
+  Container,
+  CountdownButton,
+  FinishedButton,
+  StopCountdownButton,
+} from './styles';
+
+let countdownTimeout: NodeJS.Timeout;
 
 export const Countdown = () => {
-  const [time, setTime] = useState(30 * 60);
-  const [active, setActive] = useState(false);
+  const [time, setTime] = useState(5);
+  const [isActive, setIsActive] = useState(false);
+  const [hasFinished, setHasFinished] = useState(false);
 
   useEffect(() => {
-    if (active && time > 0) {
-      setTimeout(() => {
+    if (isActive && time > 0) {
+      countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    } else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
     }
-  }, [active, time]);
+  }, [isActive, time]);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -19,12 +32,12 @@ export const Countdown = () => {
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
-  const toggleCountdown = () => {
-    if (active) {
-      setActive(false);
-    } else {
-      setActive(true);
-    }
+  const startCountdown = () => setIsActive(true);
+
+  const resetCountdown = () => {
+    clearTimeout(countdownTimeout);
+    setIsActive(false);
+    setTime(25 * 60);
   };
 
   return (
@@ -41,9 +54,29 @@ export const Countdown = () => {
         </div>
       </Container>
 
-      <CountdownButton onClick={toggleCountdown}>
-        {active ? 'Pausar o ciclo' : 'Iniciar um ciclo'}
-      </CountdownButton>
+      {hasFinished ? (
+        <FinishedButton>
+          Ciclo encerrado
+          <Image
+            src='/icons/check_circle.svg'
+            width='40px'
+            height='20px'
+            alt='Check circle'
+          />
+        </FinishedButton>
+      ) : (
+        <>
+          {isActive ? (
+            <StopCountdownButton type='button' onClick={resetCountdown}>
+              Abandonar ciclo
+            </StopCountdownButton>
+          ) : (
+            <CountdownButton type='button' onClick={startCountdown}>
+              Iniciar um ciclo
+            </CountdownButton>
+          )}
+        </>
+      )}
     </>
   );
 };
