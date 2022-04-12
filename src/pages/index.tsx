@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ExperienceBar } from '../components/ExperienceBar';
+import { HomePage } from '../components/Home';
 
 const Container = styled.div`
   height: 100vh;
@@ -13,7 +13,7 @@ const Container = styled.div`
 export default function Home() {
   return (
     <Container>
-      <ExperienceBar />
+      <HomePage />
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 import { Container } from './styles';
 
 export const ExperienceBar = () => {
-  const completed = '90%';
+  const completed = '40%';
   const percentage = Number(completed.replace(`%`, '')) / 100;
 
   return (
