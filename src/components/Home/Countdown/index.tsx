@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useChallenges } from '../../../hooks/useChallenges';
 import {
   Container,
-  CountdownButton,
+  StartCountdownButton,
   FinishedButton,
   StopCountdownButton,
 } from './styles';
@@ -14,6 +14,8 @@ export const Countdown = () => {
   const [time, setTime] = useState(5);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
+
+  const { startNewChallenge } = useChallenges();
 
   useEffect(() => {
     if (isActive && time > 0) {
@@ -71,9 +73,9 @@ export const Countdown = () => {
               Abandonar ciclo
             </StopCountdownButton>
           ) : (
-            <CountdownButton type='button' onClick={startCountdown}>
+            <StartCountdownButton type='button' onClick={startCountdown}>
               Iniciar um ciclo
-            </CountdownButton>
+            </StartCountdownButton>
           )}
         </>
       )}

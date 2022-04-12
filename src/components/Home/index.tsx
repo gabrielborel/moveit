@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { ChallengeBox } from './ChallengeBox';
 
 import { CompletedChallenges } from './CompletedChallenges';
 import { Countdown } from './Countdown';
@@ -22,7 +23,9 @@ export const HomePage = () => {
           <Countdown />
         </div>
 
-        <div></div>
+        <div>
+          <ChallengeBox />
+        </div>
       </MainContent>
     </>
   );

@@ -36,6 +36,7 @@ export default createGlobalStyle<{ theme: Theme }>`
 
   button {
     cursor: pointer;
+    font-family: 'Inter', sans-serif;
   }
 
   a {

@@ -40,7 +40,7 @@ export const Container = styled.div`
   }
 `;
 
-export const CountdownButton = styled.button`
+export const StartCountdownButton = styled.button`
   width: 100%;
   height: 5rem;
   margin-top: 2rem;
@@ -55,14 +55,13 @@ export const CountdownButton = styled.button`
   font-weight: 600;
   letter-spacing: 1px;
   transition: background 0.2s;
-  font-family: Inter, sans-serif;
 
   &:hover {
     background: ${({ theme }) => theme.colors.blueDark};
   }
 `;
 
-export const StopCountdownButton = styled(CountdownButton)`
+export const StopCountdownButton = styled(StartCountdownButton)`
   background: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.title};
 
@@ -72,7 +71,7 @@ export const StopCountdownButton = styled(CountdownButton)`
   }
 `;
 
-export const FinishedButton = styled(CountdownButton)`
+export const FinishedButton = styled(StartCountdownButton)`
   background: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.text};
   border-bottom: 4px solid ${({ theme }) => theme.colors.green};
