@@ -1,36 +1,39 @@
 import Image from 'next/image';
-import { useChallenges } from '../../../hooks/useChallenges';
+import { useContext } from 'react';
+import { ChallengesContext } from '../../../contexts/ChallengesContext';
 import {
   ChallengeFailedBtn,
   ChallengeSucceededBtn,
   Container,
   ChallengeActive,
-  ChallengeNotActive,
+  ChallengeNotActive
 } from './styles';
 
 export const ChallengeBox = () => {
-  const hasActiveChallenge = true;
+  const { activeChallenge, resetChallenge } = useContext(ChallengesContext);
 
   return (
     <Container>
-      {hasActiveChallenge ? (
+      {activeChallenge ? (
         <ChallengeActive>
-          <header>Ganhe 400 xp</header>
+          <header>Ganhe {activeChallenge.amount} xp</header>
 
           <main>
             <Image
-              src='/icons/body.svg'
+              src={`/icons/${activeChallenge.type}.svg`}
               alt='body'
               width='140px'
               height='120px'
             />
 
             <strong>Novo desafio</strong>
-            <p>Levante e faça uma caminhada de 3 minutos</p>
+            <p>{activeChallenge.description}</p>
           </main>
 
           <footer>
-            <ChallengeFailedBtn type='button'>Falhei</ChallengeFailedBtn>
+            <ChallengeFailedBtn type='button' onClick={resetChallenge}>
+              Falhei
+            </ChallengeFailedBtn>
             <ChallengeSucceededBtn type='button'>
               Completei
             </ChallengeSucceededBtn>

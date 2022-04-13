@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { useChallenges } from '../../../hooks/useChallenges';
+import { useContext, useEffect, useState } from 'react';
+import { ChallengesContext } from '../../../contexts/ChallengesContext';
 import {
   Container,
   StartCountdownButton,
   FinishedButton,
-  StopCountdownButton,
+  StopCountdownButton
 } from './styles';
 
 let countdownTimeout: NodeJS.Timeout;
@@ -14,8 +14,7 @@ export const Countdown = () => {
   const [time, setTime] = useState(5);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
-
-  const { startNewChallenge } = useChallenges();
+  const { startNewChallenge } = useContext(ChallengesContext);
 
   useEffect(() => {
     if (isActive && time > 0) {
@@ -25,7 +24,9 @@ export const Countdown = () => {
     } else if (isActive && time === 0) {
       setHasFinished(true);
       setIsActive(false);
+      startNewChallenge();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, time]);
 
   const minutes = Math.floor(time / 60);
