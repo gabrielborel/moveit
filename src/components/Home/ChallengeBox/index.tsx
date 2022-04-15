@@ -10,8 +10,7 @@ import {
 } from './styles';
 
 export const ChallengeBox = () => {
-  const { activeChallenge, resetChallenge, completeChallenge } =
-    useChallenges();
+  const { activeChallenge, resetChallenge, completeChallenge } = useChallenges();
   const { resetCountdown } = useCountdown();
 
   const handleChallengeSucceeded = () => {
@@ -46,10 +45,7 @@ export const ChallengeBox = () => {
             <ChallengeFailedBtn type='button' onClick={handleChallengeFailed}>
               Falhei
             </ChallengeFailedBtn>
-            <ChallengeSucceededBtn
-              type='button'
-              onClick={handleChallengeSucceeded}
-            >
+            <ChallengeSucceededBtn type='button' onClick={handleChallengeSucceeded}>
               Completei
             </ChallengeSucceededBtn>
           </footer>
@@ -58,12 +54,7 @@ export const ChallengeBox = () => {
         <ChallengeNotActive>
           <strong>Finalize um ciclo para receber um desafio</strong>
           <p>
-            <Image
-              src='/icons/level-up.svg'
-              alt='Level up'
-              width='100px'
-              height='60px'
-            />
+            <Image src='/icons/level-up.svg' alt='Level up' width='100px' height='60px' />
             Avance de level completando desafios
           </p>
         </ChallengeNotActive>
