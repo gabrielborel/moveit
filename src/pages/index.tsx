@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import { HomePage } from '../components/Home';
 
@@ -10,10 +11,22 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export default function Home() {
+export default function Home(props) {
   return (
     <Container>
-      <HomePage />
+      <HomePage serverSideProps={props} />
     </Container>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { level, currentExperience, challengesCompleted } = context.req.cookies;
+
+  return {
+    props: {
+      level: Number(level),
+      currentExperience: Number(currentExperience),
+      challengesCompleted: Number(challengesCompleted)
+    }
+  };
+};

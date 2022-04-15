@@ -10,6 +10,14 @@ import React from 'react';
 import { ChallengesProvider } from '../../contexts/ChallengesContext';
 import { CountdownProvider } from '../../contexts/CountdownContext';
 
+interface HomeProps {
+  serverSideProps: {
+    level: number;
+    currentExperience: number;
+    challengesCompleted: number;
+  };
+}
+
 const variants = {
   container1: {
     hidden: { opacity: 1, scale: 0 },
@@ -41,9 +49,13 @@ const variants = {
   }
 };
 
-export const HomePage = () => {
+export const HomePage = ({ serverSideProps: Props }: HomeProps) => {
   return (
-    <ChallengesProvider>
+    <ChallengesProvider
+      level={Props.level}
+      currentExperience={Props.currentExperience}
+      challengesCompleted={Props.challengesCompleted}
+    >
       <Head>
         <title>Início | moveit</title>
       </Head>
@@ -52,20 +64,14 @@ export const HomePage = () => {
 
       <CountdownProvider>
         <MainContent>
-          <motion.div
-            variants={variants.container1}
-            initial='hidden'
-            animate='visible'
-          >
-            {[
-              <Profile key={1} />,
-              <CompletedChallenges key={2} />,
-              <Countdown key={3} />
-            ].map((JSXComponent) => (
-              <motion.div variants={variants.item} key={JSXComponent.key}>
-                {JSXComponent}
-              </motion.div>
-            ))}
+          <motion.div variants={variants.container1} initial='hidden' animate='visible'>
+            {[<Profile key={1} />, <CompletedChallenges key={2} />, <Countdown key={3} />].map(
+              (JSXComponent) => (
+                <motion.div variants={variants.item} key={JSXComponent.key}>
+                  {JSXComponent}
+                </motion.div>
+              )
+            )}
           </motion.div>
 
           <motion.div
