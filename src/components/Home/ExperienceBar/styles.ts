@@ -20,6 +20,7 @@ export const Container = styled.header`
       height: 4px;
       border-radius: 4px;
       background: ${({ theme }) => theme.colors.green};
+      transition: witdh 1s;
     }
 
     span {

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { useContext } from 'react';
-import { ChallengesContext } from '../../../contexts/ChallengesContext';
+import { useChallenges } from '../../../hooks/useChallenges';
+import { useCountdown } from '../../../hooks/useCountdown';
 import {
   ChallengeFailedBtn,
   ChallengeSucceededBtn,
@@ -10,7 +10,19 @@ import {
 } from './styles';
 
 export const ChallengeBox = () => {
-  const { activeChallenge, resetChallenge } = useContext(ChallengesContext);
+  const { activeChallenge, resetChallenge, completeChallenge } =
+    useChallenges();
+  const { resetCountdown } = useCountdown();
+
+  const handleChallengeSucceeded = () => {
+    completeChallenge();
+    resetCountdown();
+  };
+
+  const handleChallengeFailed = () => {
+    resetChallenge();
+    resetCountdown();
+  };
 
   return (
     <Container>
@@ -31,10 +43,13 @@ export const ChallengeBox = () => {
           </main>
 
           <footer>
-            <ChallengeFailedBtn type='button' onClick={resetChallenge}>
+            <ChallengeFailedBtn type='button' onClick={handleChallengeFailed}>
               Falhei
             </ChallengeFailedBtn>
-            <ChallengeSucceededBtn type='button'>
+            <ChallengeSucceededBtn
+              type='button'
+              onClick={handleChallengeSucceeded}
+            >
               Completei
             </ChallengeSucceededBtn>
           </footer>

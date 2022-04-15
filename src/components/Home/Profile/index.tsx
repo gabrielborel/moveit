@@ -1,7 +1,16 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { Container } from './styles';
+import { useChallenges } from '../../../hooks/useChallenges';
+import { useTheme } from '../../../hooks/useTheme';
+
+import { Btn, Container } from './styles';
+import { BsFillMoonFill } from 'react-icons/bs';
+import { FiSun } from 'react-icons/fi';
 
 export const Profile = () => {
+  const { level } = useChallenges();
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <Container>
       <Image
@@ -20,9 +29,29 @@ export const Profile = () => {
             width='15px'
             height='15px'
           />
-          <span>Level 1</span>
+          <span>Level {level}</span>
         </p>
       </div>
+
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <Btn
+          as={motion.button}
+          key={String(theme.type)}
+          initial={{ y: -20, opacity: 0.8 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={toggleTheme}
+        >
+          {theme.type === 'light' ? (
+            <BsFillMoonFill
+              style={{ height: '18px', width: '18px', color: 'white' }}
+            />
+          ) : (
+            <FiSun style={{ height: '18px', width: '18px' }} />
+          )}
+        </Btn>
+      </AnimatePresence>
     </Container>
   );
 };

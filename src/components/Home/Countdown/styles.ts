@@ -20,7 +20,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-evenly;
 
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.primary};
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     font-size: 8.5rem;
@@ -31,11 +31,11 @@ export const Container = styled.div`
     }
 
     span:first-child {
-      border-right: 1px solid #f0f1f3;
+      border-right: 1px solid ${({ theme }) => theme.colors.background};
     }
 
     span:last-child {
-      border-left: 1px solid #f0f1f3;
+      border-left: 1px solid ${({ theme }) => theme.colors.background};
     }
   }
 `;
@@ -62,22 +62,26 @@ export const StartCountdownButton = styled.button`
 `;
 
 export const StopCountdownButton = styled(StartCountdownButton)`
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.title};
+
+  .icon {
+    color: red;
+  }
 
   &:hover {
     background: ${({ theme }) => theme.colors.red};
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
 export const FinishedButton = styled(StartCountdownButton)`
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
   border-bottom: 4px solid ${({ theme }) => theme.colors.green};
   cursor: not-allowed;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.primary};
   }
 `;

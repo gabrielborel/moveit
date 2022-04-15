@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion';
-import { useContext } from 'react';
-import { ChallengesContext } from '../../../contexts/ChallengesContext';
+import { useChallenges } from '../../../hooks/useChallenges';
 import { Container } from './styles';
 
 const variants = { hidden: { opacity: 0 }, visible: { opacity: 1 } };
 
 export const ExperienceBar = () => {
-  const { currentExperience, experienceToNextLevel } =
-    useContext(ChallengesContext);
+  const { currentExperience, experienceToNextLevel } = useChallenges();
 
   const percentToNextLevel =
     Math.round(currentExperience * 100) / experienceToNextLevel;
@@ -22,8 +20,12 @@ export const ExperienceBar = () => {
     >
       <span>0 xp</span>
       <div>
-        <div style={{ width: `${percentToNextLevel}%` }} />
-        <span style={{ left: `${percentToNextLevel}%` }}>
+        <div
+          style={{ transition: 'width, 1s', width: `${percentToNextLevel}%` }}
+        />
+        <span
+          style={{ transition: 'left, 1s', left: `${percentToNextLevel}%` }}
+        >
           {currentExperience} xp
         </span>
       </div>
