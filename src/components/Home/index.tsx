@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import { ChallengeBox } from './ChallengeBox';
 import { CompletedChallenges } from './CompletedChallenges';
@@ -6,7 +7,6 @@ import { ExperienceBar } from './ExperienceBar';
 import { Profile } from './Profile';
 import { MainContent } from './styles';
 import { motion } from 'framer-motion';
-import React from 'react';
 import { ChallengesProvider } from '../../contexts/ChallengesContext';
 import { CountdownProvider } from '../../contexts/CountdownContext';
 
@@ -64,14 +64,20 @@ export const HomePage = ({ serverSideProps: Props }: HomeProps) => {
 
       <CountdownProvider>
         <MainContent>
-          <motion.div variants={variants.container1} initial='hidden' animate='visible'>
-            {[<Profile key={1} />, <CompletedChallenges key={2} />, <Countdown key={3} />].map(
-              (JSXComponent) => (
-                <motion.div variants={variants.item} key={JSXComponent.key}>
-                  {JSXComponent}
-                </motion.div>
-              )
-            )}
+          <motion.div
+            variants={variants.container1}
+            initial='hidden'
+            animate='visible'
+          >
+            {[
+              <Profile key={1} />,
+              <CompletedChallenges key={2} />,
+              <Countdown key={3} />
+            ].map((JSXComponent) => (
+              <motion.div variants={variants.item} key={JSXComponent.key}>
+                {JSXComponent}
+              </motion.div>
+            ))}
           </motion.div>
 
           <motion.div

@@ -29,9 +29,6 @@ export const Container = styled.div`
 export const Btn = styled.button`
   position: absolute;
   right: 0;
-  padding: 10px;
   border: none;
-  background-color: ${({ theme }) => theme.colors.toggleThemeBtn};
-  border-radius: 5px;
-  opacity: 0.1;
+  background-color: transparent;
 `;

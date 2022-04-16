@@ -23,12 +23,7 @@ export const Profile = () => {
       <div>
         <strong>Gabriel Borel</strong>
         <p>
-          <Image
-            src='/icons/level.svg'
-            alt='Level Icon'
-            width='15px'
-            height='15px'
-          />
+          <Image src='/icons/level.svg' alt='Level Icon' width='15px' height='15px' />
           <span>Level {level}</span>
         </p>
       </div>
@@ -44,11 +39,9 @@ export const Profile = () => {
           onClick={toggleTheme}
         >
           {theme.type === 'light' ? (
-            <BsFillMoonFill
-              style={{ height: '18px', width: '18px', color: 'white' }}
-            />
+            <BsFillMoonFill style={{ height: '25px', width: '25px' }} />
           ) : (
-            <FiSun style={{ height: '18px', width: '18px' }} />
+            <FiSun style={{ height: '25px', width: '25px', color: 'white' }} />
           )}
         </Btn>
       </AnimatePresence>

@@ -23,7 +23,7 @@ export default createGlobalStyle<{ theme: Theme }>`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: background, background-color, color 0.1s;
+    transition: background, background-color, color 0.05s;
   }
 
   body {

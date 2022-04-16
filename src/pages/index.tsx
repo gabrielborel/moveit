@@ -1,6 +1,13 @@
 import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import { HomePage } from '../components/Home';
+import { useTheme } from '../hooks/useTheme';
+
+interface HomeProps {
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
+}
 
 const Container = styled.div`
   height: 100vh;
@@ -11,7 +18,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export default function Home(props) {
+export default function Home(props: HomeProps) {
   return (
     <Container>
       <HomePage serverSideProps={props} />
