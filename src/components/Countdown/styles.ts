@@ -28,6 +28,7 @@ export const Container = styled.div`
 
     span {
       flex: 1;
+      width: 75px;
     }
 
     span:first-child {

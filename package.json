@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.3",
+    "axios": "^0.27.2",
+    "faunadb": "^4.5.4",
     "framer-motion": "^6.2.10",
     "js-cookie": "^3.0.1",
     "next": "12.1.4",
+    "next-auth": "^4.3.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-icons": "^4.3.1",
+    "screenshot-tweet": "^1.1.1",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {

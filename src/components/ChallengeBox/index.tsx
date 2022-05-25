@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useChallenges } from '../../../hooks/useChallenges';
-import { useCountdown } from '../../../hooks/useCountdown';
+import { useChallenges } from '../../hooks/useChallenges';
+import { useCountdown } from '../../hooks/useCountdown';
 import {
   ChallengeFailedBtn,
   ChallengeSucceededBtn,

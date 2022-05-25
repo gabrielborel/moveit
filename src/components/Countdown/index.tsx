@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useCountdown } from '../../../hooks/useCountdown';
+import { useCountdown } from '../../hooks/useCountdown';
 import {
   Container,
   StartCountdownButton,

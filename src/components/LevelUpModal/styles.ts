@@ -39,12 +39,31 @@ export const Container = styled.div`
     margin-top: 0.25rem;
   }
 
-  button {
+  .close-modal {
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;
     background: transparent;
     border: 0;
     font-size: 0;
+  }
+
+  .twitter {
+    display: block;
+    background-color: ${({ theme }) => theme.colors.blueTwitter};
+    border: none;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
   }
 `;

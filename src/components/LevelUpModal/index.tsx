@@ -1,8 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import { FiMousePointer } from 'react-icons/fi';
-import { useChallenges } from '../../../hooks/useChallenges';
+import { useChallenges } from '../../hooks/useChallenges';
 import { Container, Overlay } from './styles';
 
 interface LevelUpModalProps {
@@ -22,12 +20,11 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
           >
-            <header>{level}</header>
-
-            <strong>Parabéns</strong>
-            <p>Você alcançou um novo level</p>
-
-            <button type='button' onClick={closeLevelUpModal}>
+            <button
+              type='button'
+              className='close-modal'
+              onClick={closeLevelUpModal}
+            >
               <Image
                 src='/icons/close.svg'
                 alt='Fechar modal'
@@ -35,6 +32,20 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
                 height='40px'
               />
             </button>
+
+            <header>{level}</header>
+
+            <strong>Parabéns</strong>
+            <p>Você alcançou um novo level</p>
+
+            <a
+              href='https://twitter.com/intent/tweet?text=Vejam só!! Acabei de avançar de level <image />'
+              rel='noopener noreferrer'
+              target='_blank'
+              className='twitter-share-button twitter'
+            >
+              Compartilhe no twitter
+            </a>
           </Container>
         </Overlay>
       )}

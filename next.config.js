@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    styledComponents: true,
+    styledComponents: true
   },
   images: {
-    domains: ['github.com'],
-  },
+    domains: ['github.com', 'avatars.githubusercontent.com']
+  }
 };
 
 module.exports = nextConfig;

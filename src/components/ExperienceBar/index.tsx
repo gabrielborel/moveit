@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useChallenges } from '../../../hooks/useChallenges';
+import { useChallenges } from '../../hooks/useChallenges';
 import { Container } from './styles';
 
 const variants = { hidden: { opacity: 0 }, visible: { opacity: 1 } };

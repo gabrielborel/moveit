@@ -14,7 +14,8 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.colors.title};
     }
 
-    p {
+    div {
+      margin-left: 0;
       margin-top: 0.25rem;
       display: flex;
 
@@ -24,11 +25,4 @@ export const Container = styled.div`
       }
     }
   }
-`;
-
-export const Btn = styled.button`
-  position: absolute;
-  right: 0;
-  border: none;
-  background-color: transparent;
 `;

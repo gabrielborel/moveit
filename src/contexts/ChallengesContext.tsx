@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
-import { LevelUpModal } from '../components/Home/LevelUpModal';
+import { LevelUpModal } from '../components/LevelUpModal';
+import { api } from '../services/api';
 
 interface ChallengesProviderProps {
   children: React.ReactNode;
@@ -32,10 +32,17 @@ interface ChallengesContextData {
 export const ChallengesContext = createContext({} as ChallengesContextData);
 ChallengesContext.displayName = 'Challenges';
 
-export const ChallengesProvider = ({ children, ...rest }: ChallengesProviderProps) => {
+export const ChallengesProvider = ({
+  children,
+  ...rest
+}: ChallengesProviderProps) => {
   const [level, setLevel] = useState(rest.level ?? 1);
-  const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
-  const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);
+  const [currentExperience, setCurrentExperience] = useState(
+    rest.currentExperience ?? 0
+  );
+  const [challengesCompleted, setChallengesCompleted] = useState(
+    rest.challengesCompleted ?? 0
+  );
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
@@ -44,9 +51,11 @@ export const ChallengesProvider = ({ children, ...rest }: ChallengesProviderProp
   }, []);
 
   useEffect(() => {
-    Cookies.set('level', String(level));
-    Cookies.set('currentExperience', String(currentExperience));
-    Cookies.set('challengesCompleted', String(challengesCompleted));
+    api.post('/update', {
+      level,
+      challengesCompleted,
+      currentExperience
+    });
   }, [level, currentExperience, challengesCompleted]);
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
