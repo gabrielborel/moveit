@@ -36,6 +36,7 @@ export const Container = styled.div`
   gap: 2.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  z-index: 2;
 
   p {
     display: block;

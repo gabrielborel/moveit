@@ -14,7 +14,14 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <Overlay>
+        <Overlay
+          onClick={(e) => {
+            const target = e.target.className;
+            if (target.includes('Overlay')) {
+              closeLevelUpModal();
+            }
+          }}
+        >
           <Container
             as={motion.div}
             initial={{ scale: 0.9, opacity: 0 }}

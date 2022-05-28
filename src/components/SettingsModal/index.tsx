@@ -43,7 +43,7 @@ export const SettingsModal = () => {
       <AnimatePresence exitBeforeEnter>
         {isOpen && (
           <Overlay
-            onClick={(e: MouseEvent) => {
+            onClick={(e) => {
               const target = e.target.className;
               if (target.includes('Overlay')) {
                 setIsOpen(false);
