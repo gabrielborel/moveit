@@ -14,6 +14,23 @@ export const Content = styled.div`
   display: flex;
   justify-content: space-evenly;
 
+  @media (max-width: 770px) {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 8rem;
+  }
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 6rem;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    padding: 0 2rem;
+  }
+
   .login {
     .icon {
       display: block;
@@ -39,7 +56,7 @@ export const Content = styled.div`
       border: none;
       width: 100%;
       border: 3px solid ${({ theme }) => theme.colors.blueDark};
-      background-color: ${({ theme }) => theme.colors.primary};
+      background-color: ${({ theme }) => theme.colors.background};
       padding: 1.1rem;
       color: ${({ theme }) => theme.colors.blueDark};
       font-size: 1.1rem;

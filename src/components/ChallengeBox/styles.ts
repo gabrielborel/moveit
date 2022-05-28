@@ -7,6 +7,7 @@ export const Container = styled.div`
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
   padding: 1.5rem 2rem;
   display: flex;
+  min-height: 450px;
   flex-direction: column;
   justify-content: center;
   text-align: center;
@@ -63,6 +64,7 @@ export const ChallengeActive = styled.div`
 
     p {
       line-height: 1.5;
+      margin-bottom: 1rem;
     }
   }
 

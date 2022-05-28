@@ -119,7 +119,7 @@ export const ChallengesProvider = ({
     >
       {children}
 
-      <LevelUpModal isVisible={isLevelUpModalOpen} />
+      <LevelUpModal isVisible={true} />
     </ChallengesContext.Provider>
   );
 };

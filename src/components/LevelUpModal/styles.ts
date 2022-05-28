@@ -11,7 +11,12 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) =>
+    theme.type === 'dark'
+      ? 'rgba( 18, 18, 18, 0.5 )'
+      : 'rgba( 242, 243, 245, 0.5 )'};
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   width: 100%;
   max-width: 400px;
   padding: 2rem 3rem;
@@ -49,7 +54,6 @@ export const Container = styled.div`
   }
 
   .twitter {
-    display: block;
     background-color: ${({ theme }) => theme.colors.blueTwitter};
     border: none;
     width: 100%;
@@ -61,6 +65,9 @@ export const Container = styled.div`
     font-size: 1rem;
     letter-spacing: 1px;
     transition: filter 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 
     &:hover {
       filter: brightness(0.9);

@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useChallenges } from '../../hooks/useChallenges';
 import { Container, Overlay } from './styles';
+import { BsTwitter } from 'react-icons/bs';
 
 interface LevelUpModalProps {
   isVisible: boolean;
@@ -44,6 +45,7 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
               target='_blank'
               className='twitter-share-button twitter'
             >
+              <BsTwitter size={20} />
               Compartilhe no twitter
             </a>
           </Container>

@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { Overlay, Container, Btn } from './styles';
 import { HiMenu, HiLogout } from 'react-icons/hi';
-import { BiArrowBack } from 'react-icons/bi';
 import { AiOutlineBarChart } from 'react-icons/ai';
 import { useTheme } from '../../hooks/useTheme';
 import { FiSun, FiMoon } from 'react-icons/fi';
-import { useRouter } from 'next/router';
 import { signOut } from 'next-auth/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const variants = {
   initial: {
@@ -23,14 +23,16 @@ const variants = {
   },
   exit: {
     y: 10,
-    opacity: 0
+    opacity: 0,
+    transition: {
+      duration: 0.4
+    }
   }
 };
 
 export const SettingsModal = () => {
   const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
   return (
     <>
@@ -40,7 +42,14 @@ export const SettingsModal = () => {
 
       <AnimatePresence exitBeforeEnter>
         {isOpen && (
-          <Overlay>
+          <Overlay
+            onClick={(e: MouseEvent) => {
+              const target = e.target.className;
+              if (target.includes('Overlay')) {
+                setIsOpen(false);
+              }
+            }}
+          >
             <Container
               as={motion.div}
               variants={variants}
@@ -48,40 +57,33 @@ export const SettingsModal = () => {
               animate='visible'
               exit='exit'
             >
-              <p>Opções</p>
+              <Image
+                src='/logo-full.svg'
+                alt='Moveit logo'
+                height='50px'
+                width='200px'
+                priority={true}
+              />
 
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                onClick={() => setIsOpen(false)}
-              >
-                <BiArrowBack size={20} />
-                Voltar
-              </motion.button>
+              <p>Menu</p>
 
               <div>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  onClick={toggleTheme}
-                >
+                <button type='button' onClick={toggleTheme}>
                   {theme.type === 'light' ? <FiMoon /> : <FiSun />}
                   {theme.type === 'light' ? 'Escuro' : 'Claro'}
-                </motion.button>
+                </button>
 
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  onClick={() => router.push('/ranking')}
-                >
-                  <AiOutlineBarChart />
-                  Ranking
-                </motion.button>
+                <Link href='/ranking' passHref>
+                  <button type='button'>
+                    <AiOutlineBarChart />
+                    Ranking
+                  </button>
+                </Link>
 
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  onClick={() => signOut()}
-                >
+                <button type='button' onClick={() => signOut()}>
                   <HiLogout />
                   Sair
-                </motion.button>
+                </button>
               </div>
             </Container>
           </Overlay>

@@ -4,7 +4,9 @@ import {
   Container,
   StartCountdownButton,
   FinishedButton,
-  StopCountdownButton
+  StopCountdownButton,
+  PlayIcon,
+  CloseIcon
 } from './styles';
 
 export const Countdown = () => {
@@ -49,10 +51,12 @@ export const Countdown = () => {
           {isActive ? (
             <StopCountdownButton type='button' onClick={resetCountdown}>
               Abandonar ciclo
+              <CloseIcon />
             </StopCountdownButton>
           ) : (
             <StartCountdownButton type='button' onClick={startCountdown}>
               Iniciar um ciclo
+              <PlayIcon />
             </StartCountdownButton>
           )}
         </>

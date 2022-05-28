@@ -5,6 +5,7 @@ export const Btn = styled.button`
   right: 0;
   border: none;
   background-color: transparent;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Overlay = styled.div`
@@ -16,19 +17,25 @@ export const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1;
+  margin-left: 0 !important;
 `;
 
 export const Container = styled.div`
-  position: relative;
-  background: ${({ theme }) => theme.colors.background};
+  margin: 2rem 2rem 8rem 2rem !important;
+  background: ${({ theme }) =>
+    theme.type === 'dark'
+      ? 'rgba( 18, 18, 18, 0.5 )'
+      : 'rgba( 242, 243, 245, 0.5 )'};
   border-radius: 5px;
   width: 100%;
   max-width: 400px;
   padding: 2rem 3rem;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
+  gap: 2.5rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   p {
     display: block;
@@ -42,13 +49,18 @@ export const Container = styled.div`
     align-items: center;
     gap: 0.2rem;
     position: absolute;
-    top: 36px;
+    top: 130px;
     right: 40px;
     border: none;
     background-color: transparent;
     font-size: 1.1rem;
     color: ${({ theme }) => theme.colors.text};
-    transition: color 0.2s;
+    transition: color, transform, 0.2s;
+
+    &:hover {
+      transform: scale(1.07);
+      color: ${({ theme }) => theme.colors.blueDark};
+    }
   }
 
   div {
@@ -57,7 +69,7 @@ export const Container = styled.div`
     gap: 1rem;
 
     button {
-      transition: color 0.2s;
+      transition: color, transform, 0.2s;
       color: ${({ theme }) => theme.colors.text};
       font-size: 1.2rem;
       display: flex;
@@ -66,6 +78,11 @@ export const Container = styled.div`
       width: fit-content;
       border: none;
       background-color: transparent;
+
+      &:hover {
+        transform: scale(1.07);
+        color: ${({ theme }) => theme.colors.blueDark};
+      }
     }
   }
 `;

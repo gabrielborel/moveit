@@ -1,148 +1,67 @@
-import { GetServerSideProps } from 'next';
-import { getSession, useSession } from 'next-auth/react';
-import Head from 'next/head';
-import styled from 'styled-components';
-import { ChallengeBox } from '../components/ChallengeBox';
-import { ExperienceBar } from '../components/ExperienceBar';
-import { ChallengesProvider } from '../contexts/ChallengesContext';
-import { CountdownProvider } from '../contexts/CountdownContext';
+import Image from 'next/image';
+import { Container, Content } from '../styles/signin.styles';
+import { GoMarkGithub } from 'react-icons/go';
 import { motion } from 'framer-motion';
-import { Profile } from '../components/Profile';
-import { CompletedChallenges } from '../components/CompletedChallenges';
-import { Countdown } from '../components/Countdown';
-import { fauna } from '../services/fauna';
-import { query as q } from 'faunadb';
-import { MainContent } from '../styles/home.styles';
-
-type faunaUser = {
-  data: User;
-};
-
-type User = {
-  email: string;
-  challengesCompleted: number;
-  level: number;
-  currentExperience: number;
-};
-
-interface HomeProps {
-  userData: User;
-}
-
-const Container = styled.div`
-  height: 100vh;
-  max-width: 992px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-`;
+import { signIn } from 'next-auth/react';
+import Head from 'next/head';
+import { MouseEvent } from 'react';
 
 const variants = {
-  container1: {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
+  hidden: {
+    y: 20,
+    opacity: 0
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.4
     }
   },
-  item: {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  },
-  container2: {
-    hidden: {
-      opacity: 0,
-      scale: 0
-    },
-    visible: {
-      opacity: 1,
-      scale: 1
-    }
+  exit: {
+    y: 20,
+    opacity: 0
   }
 };
 
-export default function Home({ userData }: HomeProps) {
-  const session = useSession();
+export default function SignIn() {
+  const handleSignInWithGithub = (e: MouseEvent) => {
+    e.preventDefault();
+
+    signIn('github', { callbackUrl: '/home' });
+  };
+
   return (
-    <Container>
-      <ChallengesProvider
-        level={userData.level}
-        currentExperience={userData.currentExperience}
-        challengesCompleted={userData.challengesCompleted}
-      >
-        <Head>
-          <title>Início | moveit</title>
-        </Head>
+    <>
+      <Head>
+        <title>SignIn | moveit</title>
+      </Head>
 
-        <ExperienceBar />
+      <main>
+        <Container>
+          <Content
+            as={motion.div}
+            variants={variants}
+            initial='hidden'
+            animate='visible'
+            exit='exit'
+          >
+            <Image
+              src='/logo-full.svg'
+              alt='Moveit logo'
+              width='300px'
+              height='150px'
+            />
 
-        <CountdownProvider>
-          <MainContent>
-            <motion.div
-              variants={variants.container1}
-              initial='hidden'
-              animate='visible'
-            >
-              {[
-                <Profile key={1} />,
-                <CompletedChallenges key={2} />,
-                <Countdown key={3} />
-              ].map((JSXComponent) => (
-                <motion.div variants={variants.item} key={JSXComponent.key}>
-                  {JSXComponent}
-                </motion.div>
-              ))}
-            </motion.div>
+            <div className='login'>
+              <GoMarkGithub className='icon' />
 
-            <motion.div
-              variants={variants.container2}
-              initial='hidden'
-              animate='visible'
-              transition={{ delay: 0.8 }}
-            >
-              <ChallengeBox />
-            </motion.div>
-          </MainContent>
-        </CountdownProvider>
-      </ChallengesProvider>
-    </Container>
+              <p>Entrar com github</p>
+              <button onClick={(e) => handleSignInWithGithub(e)}>Entrar</button>
+            </div>
+          </Content>
+        </Container>
+      </main>
+    </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/signin',
-        permanent: false
-      }
-    };
-  }
-
-  const user: faunaUser = await fauna.query(
-    q.Get(q.Match(q.Index('user_by_email'), q.Casefold(session.user.email)))
-  );
-
-  const userData = {
-    email: session.user.email,
-    level: user.data.level,
-    currentExperience: user.data.currentExperience,
-    challengesCompleted: user.data.challengesCompleted
-  };
-
-  return {
-    props: {
-      userData
-    }
-  };
-};

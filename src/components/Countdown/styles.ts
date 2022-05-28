@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import styled from 'styled-components';
+import { MdPlayArrow } from 'react-icons/md';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export const Container = styled.div`
   display: flex;
@@ -31,6 +32,14 @@ export const Container = styled.div`
       width: 75px;
     }
 
+    @media (max-width: 600px) {
+      font-size: 6.5rem;
+
+      span {
+        width: 50px;
+      }
+    }
+
     span:first-child {
       border-right: 1px solid ${({ theme }) => theme.colors.background};
     }
@@ -56,6 +65,7 @@ export const StartCountdownButton = styled.button`
   font-weight: 600;
   letter-spacing: 1px;
   transition: background 0.2s;
+  gap: 1rem;
 
   &:hover {
     background: ${({ theme }) => theme.colors.blueDark};
@@ -72,7 +82,6 @@ export const StopCountdownButton = styled(StartCountdownButton)`
 
   &:hover {
     background: ${({ theme }) => theme.colors.red};
-    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -85,4 +94,14 @@ export const FinishedButton = styled(StartCountdownButton)`
   &:hover {
     background: ${({ theme }) => theme.colors.primary};
   }
+`;
+
+export const PlayIcon = styled(MdPlayArrow)`
+  width: 22px;
+  height: 22px;
+`;
+
+export const CloseIcon = styled(AiOutlineClose)`
+  width: 22px;
+  height: 22px;
 `;

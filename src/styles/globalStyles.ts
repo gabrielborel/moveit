@@ -23,12 +23,26 @@ export default createGlobalStyle<{ theme: Theme }>`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: background, background-color, color 0.05s;
+    transition: background, background-color, color, 0.05s;
   }
 
   body {
     background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
+
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+ 
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.colors.blueDark};
+      border-radius: 8px;
+      margin: 0.1rem;
+    }
   }
 
   body, input, text-area {
