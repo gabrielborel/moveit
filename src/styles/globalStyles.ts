@@ -7,6 +7,8 @@ interface Theme {
 }
 
 export default createGlobalStyle<{ theme: Theme }>`
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap');
+
   @media (max-width: 1080px) {
     html {
       font-size: 93.75%;
