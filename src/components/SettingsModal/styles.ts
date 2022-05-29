@@ -21,6 +21,7 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
+  position: fixed;
   margin: 2rem 2rem 8rem 2rem !important;
   background: ${({ theme }) =>
     theme.type === 'dark'

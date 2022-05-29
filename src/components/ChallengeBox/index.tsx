@@ -77,6 +77,7 @@ export const ChallengeBox = () => {
                 alt='Level up'
                 width='100px'
                 height='60px'
+                style={{ zIndex: 0 }}
               />
               Avance de level completando desafios
             </p>

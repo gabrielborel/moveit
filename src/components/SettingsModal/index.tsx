@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { MutableRefObject, Ref, useEffect, useRef, useState } from 'react';
 import { Overlay, Container, Btn } from './styles';
 import { HiMenu, HiLogout } from 'react-icons/hi';
 import { AiOutlineBarChart } from 'react-icons/ai';
@@ -42,20 +42,16 @@ export const SettingsModal = () => {
 
       <AnimatePresence exitBeforeEnter>
         {isOpen && (
-          <Overlay
-            onClick={(e) => {
-              const target = e.target.className;
-              if (target.includes('Overlay')) {
-                setIsOpen(false);
-              }
-            }}
-          >
+          <Overlay onClick={() => setIsOpen(false)}>
             <Container
               as={motion.div}
               variants={variants}
               initial='initial'
               animate='visible'
               exit='exit'
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
             >
               <Image
                 src='/logo-full.svg'

@@ -15,11 +15,8 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
     <AnimatePresence>
       {isVisible && (
         <Overlay
-          onClick={(e) => {
-            const target = e.target.className;
-            if (target.includes('Overlay')) {
-              closeLevelUpModal();
-            }
+          onClick={() => {
+            closeLevelUpModal();
           }}
         >
           <Container
@@ -27,6 +24,9 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             <button
               type='button'
