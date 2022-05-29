@@ -130,6 +130,19 @@ export default function RankingPage({ users }: RankingPageProps) {
   );
 }
 
+type fetchedUsers = {
+  data: Array<{
+    data: {
+      name: string;
+      email: string;
+      image: string;
+      challengesCompleted: number;
+      level: number;
+      currentExperience: number;
+    };
+  }>;
+};
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
@@ -142,7 +155,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const fetchedUsers = await fauna.query(
+  const fetchedUsers: fetchedUsers = await fauna.query(
     q.Map(
       q.Paginate(q.Documents(q.Collection('users'))),
       q.Lambda((x) => q.Get(x))

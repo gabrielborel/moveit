@@ -17,8 +17,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         q.Get(q.Match(q.Index('user_by_email'), q.Casefold(session.user.email)))
       );
 
-      console.log(user);
-
       await fauna.query(q.Update(q.Ref(user), { data }));
 
       return res.status(200).json({ success: true });
