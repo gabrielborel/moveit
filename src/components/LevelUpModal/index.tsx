@@ -47,7 +47,7 @@ export const LevelUpModal = ({ isVisible }: LevelUpModalProps) => {
             <p>Você alcançou um novo level</p>
 
             <a
-              href='https://twitter.com/intent/tweet?text=Vejam só!! Acabei de avançar de level <image />'
+              href={`https://twitter.com/intent/tweet?text=Vejam só!! Acabei de avançar o level ${level} no moveit!`}
               rel='noopener noreferrer'
               target='_blank'
               className='twitter-share-button twitter'
