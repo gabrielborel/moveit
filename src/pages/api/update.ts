@@ -3,10 +3,6 @@ import { getSession } from 'next-auth/react';
 import { fauna } from '../../services/fauna';
 import { query as q } from 'faunadb';
 
-type faunaUser = {
-  ref: any;
-};
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
@@ -17,13 +13,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const session = await getSession({ req });
 
-      const user: faunaUser = await fauna.query(
+      const user = await fauna.query(
         q.Get(q.Match(q.Index('user_by_email'), q.Casefold(session.user.email)))
       );
 
       console.log(user);
 
-      await fauna.query(q.Update(q.Ref(user.ref), { data }));
+      await fauna.query(q.Update(q.Ref(user), { data }));
 
       return res.status(200).json({ success: true });
     } catch (err) {
