@@ -120,21 +120,23 @@ export default function Home({ userData }: HomeProps) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false
+  //     }
+  //   };
+  // }
 
   const user: faunaUser = await fauna.query(
-    q.Get(q.Match(q.Index('user_by_email'), q.Casefold(session.user.email)))
+    q.Get(
+      q.Match(q.Index('user_by_email'), q.Casefold('biel_borel@hotmail.com'))
+    )
   );
 
   const userData = {
-    email: session.user.email,
+    email: 'biel_borel@hotmail.com',
     level: user.data.level,
     currentExperience: user.data.currentExperience,
     challengesCompleted: user.data.challengesCompleted
