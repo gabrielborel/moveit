@@ -28,7 +28,11 @@ export default function SignIn() {
   const handleSignInWithGithub = (e: MouseEvent) => {
     e.preventDefault();
 
-    signIn('github', { callbackUrl: '/home' });
+    try {
+      signIn('github', { callbackUrl: '/home' });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
