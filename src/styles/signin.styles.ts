@@ -35,7 +35,7 @@ export const Content = styled.div`
     .icon {
       display: block;
       margin: 0 auto 1rem;
-      color: ${({ theme }) => theme.colors.text};
+      color: ${({ theme }) => theme.colors.blueDark};
       height: 90px;
       width: 90px;
     }
@@ -45,28 +45,58 @@ export const Content = styled.div`
       margin: 0 auto;
       font-size: 1.5rem;
       margin-bottom: 2rem;
-      color: ${({ theme }) => theme.colors.text};
+      color: ${({ theme }) => theme.colors.blueDark};
       font-weight: 600;
     }
 
     button {
+      transform: skewX(-15deg);
       display: flex;
       align-items: center;
       justify-content: center;
       border: none;
-      width: 100%;
-      border: 3px solid ${({ theme }) => theme.colors.blueDark};
+      width: 200px;
+      height: 60px;
+      text-align: center;
+      border: 0px solid ${({ theme }) => theme.colors.blueDark};
       background-color: ${({ theme }) => theme.colors.background};
       padding: 1.1rem;
       color: ${({ theme }) => theme.colors.blueDark};
       font-size: 1.1rem;
-      border-radius: 8px;
       font-weight: 700;
       transition: background-color, color, 0.2s;
+      line-height: 45px;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      svg {
+        height: 60px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
+      rect {
+        fill: none;
+        stroke: ${({ theme }) => theme.colors.blueDark};
+        stroke-width: 2;
+        stroke-dasharray: 422, 0;
+        transition: all 0.35s linear;
+      }
 
       &:hover {
-        background-color: ${({ theme }) => theme.colors.blueDark};
-        color: ${({ theme }) => theme.colors.primary};
+        background-color: #b0c4de;
+        font-weight: 900;
+        letter-spacing: 1px;
+
+        rect {
+          stroke-width: 5;
+          stroke-dasharray: 15, 310;
+          stroke-dashoffset: 48;
+          transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+        }
       }
     }
   }

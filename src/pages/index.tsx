@@ -61,7 +61,12 @@ export default function SignIn() {
               <GoMarkGithub className='icon' />
 
               <p>Entrar com github</p>
-              <button onClick={(e) => handleSignInWithGithub(e)}>Entrar</button>
+              <button onClick={(e) => handleSignInWithGithub(e)}>
+                <svg>
+                  <rect x='0' y='0' fill='none' width='100%' height='100%' />
+                </svg>
+                Entrar
+              </button>
             </div>
           </Content>
         </Container>
